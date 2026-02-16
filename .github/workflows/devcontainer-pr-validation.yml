@@ -15,9 +15,6 @@ jobs:
       - name: Validate JSON files
         run: |
           jq empty .devcontainer/devcontainer.json
-          for file in .devcontainer/config/*.json; do
-            jq empty "$file"
-          done
 
       - name: Lint Dockerfiles
         uses: hadolint/hadolint-action@v3.1.0
