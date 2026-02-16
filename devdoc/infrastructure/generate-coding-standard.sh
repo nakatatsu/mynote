@@ -5,10 +5,10 @@
 # Extracts only coding_standards and directory_structure sections
 #
 
-set -e
+set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-YAML_FILE="${SCRIPT_DIR}/development_guidline.yaml"
+YAML_FILE="${SCRIPT_DIR}/development_guideline.yaml"
 OUTPUT_FILE="${SCRIPT_DIR}/coding-standard.md"
 
 # Check if yq is available
@@ -38,12 +38,13 @@ echo "" >> "$OUTPUT_FILE"
 
 yq eval '.directory_structure.infrastructure.rules[] | "* " + .body' "$YAML_FILE" >> "$OUTPUT_FILE"
 
-# Add note if exists
-NOTE=$(yq eval '.directory_structure.infrastructure.rules[0].note' "$YAML_FILE")
-if [ "$NOTE" != "null" ]; then
-    echo "" >> "$OUTPUT_FILE"
-    echo "$NOTE" >> "$OUTPUT_FILE"
-fi
+# Add notes if they exist (iterate through all rules, not just index 0)
+yq eval '.directory_structure.infrastructure.rules[] | select(.note != null) | .note' "$YAML_FILE" | while IFS= read -r note; do
+    if [ -n "$note" ] && [ "$note" != "null" ]; then
+        echo "" >> "$OUTPUT_FILE"
+        echo "$note" >> "$OUTPUT_FILE"
+    fi
+done
 
 echo "" >> "$OUTPUT_FILE"
 

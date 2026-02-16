@@ -1,5 +1,3 @@
-# Constitution
-
 # Development Constitution
 
 Developers must adhere to this document for all activities related to coding, design, infrastructure, and operations.
@@ -36,12 +34,12 @@ All system components SHOULD be as observable as possible.
 
 In all cases, you MUST comply with the common coding standard:
 
-* `~/documents/coding-standard.md`
+* `devdoc/coding-standard.md`
 
 In addition, specific domain standards MUST also be followed:
 
-* **Frontend**: `~/documents/frontend/coding-standard.md`
-* **Infrastructure**: `~/documents/infrastructure/coding-standard.md`
+* **Frontend**: `devdoc/frontend/coding-standard.md`
+* **Infrastructure**: `devdoc/infrastructure/coding-standard.md`
 
 ### Testing Standards
 

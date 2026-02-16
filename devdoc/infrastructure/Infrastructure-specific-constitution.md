@@ -1,6 +1,6 @@
 # Infrastructure-Specific Constitution Addendum
 
-This document provides infrastructure-specific extensions to the main constitution (`/home/user/repositories/book-ai-iac/documents/constitution.md`).
+This document provides infrastructure-specific extensions to the main constitution (`../constitution.md`).
 
 ## Core Principles - Infrastructure Extensions
 
