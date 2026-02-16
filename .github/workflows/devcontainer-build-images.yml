@@ -27,7 +27,7 @@ jobs:
         image: [infrastructure, backend, frontend, local]
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Load versions
         id: versions
