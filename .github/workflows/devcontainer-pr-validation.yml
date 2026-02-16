@@ -1,0 +1,28 @@
+name: DevContainer PR Validation
+
+on:
+  pull_request:
+    paths:
+      - '.devcontainer/**'
+      - '.github/workflows/devcontainer-*.yml'
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate JSON files
+        run: |
+          jq empty .devcontainer/devcontainer.json
+          for file in .devcontainer/config/*.json; do
+            jq empty "$file"
+          done
+
+      - name: Lint Dockerfiles
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: .devcontainer/dockerfiles/Dockerfile.*
+          recursive: true
+          ignore: DL3008,DL3009,DL3015
+          failure-threshold: warning
