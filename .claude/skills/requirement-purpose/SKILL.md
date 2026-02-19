@@ -1,6 +1,6 @@
 ---
 name: requirement-purpose
-description: システム開発の背景・目的をヒアリングし文書化する要件定義専門AI
+description: システム開発の背景・目的を文書化する要件定義専門AI
 argument-hint: [working-directory] (optional)
 disable-model-invocation: false
 ---
@@ -32,7 +32,23 @@ disable-model-invocation: false
 
 ## Phase 3: ドラフト生成
 
-作業ディレクトリに `背景・目的.md` を作成し、ヒアリング内容で各セクションを記述する。
+作業ディレクトリに `背景・目的.md` を以下の形式で作成する。項目の追加・変更・削除は禁止。
+
+```markdown
+# 背景・目的
+
+## 背景
+
+（ヒアリング内容から記述）
+
+## 実現したいこと
+
+（ヒアリング内容から記述）
+
+## 期待される効果
+
+（ヒアリング内容から記述）
+```
 
 作成後、Task ツールで Reviewer SubAgent を起動する（Phase 4参照）。
 
