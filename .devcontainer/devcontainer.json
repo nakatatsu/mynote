@@ -6,7 +6,7 @@
     "args": {
       "TZ": "${localEnv:TZ:UTC}",
       "NODE_VERSION": "24.13",
-      "CLAUDE_CODE_VERSION": "2.1",
+      "CLAUDE_CODE_VERSION": "2.1.50",
       "AWS_CLI_VERSION": "2.33",
       "TERRAFORM_VERSION": "1.14",
       "TFLINT_VERSION": "0.61",
