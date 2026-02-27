@@ -20,6 +20,8 @@
       "OSV_SCANNER_VERSION": "2.3",
       "GOSEC_VERSION": "2.23",
       "NEXTJS_VERSION": "16.1",
+      "CODEX_VERSION": "0.106",
+      "TFLINT_AWS_PLUGIN_VERSION": "0.45.0",
       "GIT_DELTA_VERSION": "0.18.2",
       "ZSH_IN_DOCKER_VERSION": "1.2.1"
     }
@@ -67,7 +69,8 @@
   "remoteUser": "node",
   "mounts": [
     "source=devcontainer-bashhistory-${devcontainerId},target=/commandhistory,type=volume",
-    "source=devcontainer-config-${devcontainerId},target=/home/node/.claude,type=volume"
+    "source=devcontainer-config-${devcontainerId},target=/home/node/.claude,type=volume",
+    "source=devcontainer-codex-${devcontainerId},target=/home/node/.codex,type=volume"
   ],
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096",

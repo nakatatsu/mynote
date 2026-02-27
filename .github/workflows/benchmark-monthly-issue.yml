@@ -1,0 +1,36 @@
+name: Benchmark Monthly Issue
+
+on:
+  schedule:
+    - cron: '0 0 1 * *'
+  workflow_dispatch:
+
+jobs:
+  create-issue:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get current month
+        id: date
+        run: echo "yyyymm=$(date +'%Y-%m')" >> $GITHUB_OUTPUT
+
+      - name: Create benchmark issue
+        uses: actions/github-script@v7
+        env:
+          YYYYMM: ${{ steps.date.outputs.yyyymm }}
+        with:
+          script: |
+            const fs = require('fs');
+            const yyyymm = process.env.YYYYMM;
+            const body = fs.readFileSync('.github/issue-templates/benchmark-monthly.md', 'utf8')
+              .replace(/YYYY-MM/g, yyyymm);
+            await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `[Benchmark] ${yyyymm} 月次実施`,
+              body,
+              labels: ['benchmark']
+            });
