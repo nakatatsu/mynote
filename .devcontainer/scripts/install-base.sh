@@ -6,7 +6,7 @@ set -euo pipefail
 # Install system packages
 apt-get update && apt-get install -y --no-install-recommends \
   less git procps sudo fzf zsh man-db unzip gnupg2 gh jq nano vim \
-  iptables ipset iproute2 dnsutils aggregate curl \
+  iptables ipset iproute2 dnsutils aggregate curl locales \
   && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Install AWS CLI

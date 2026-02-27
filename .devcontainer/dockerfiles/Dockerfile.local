@@ -23,6 +23,9 @@ ENV VISUAL=nano
 
 COPY scripts/install-base.sh /tmp/
 RUN bash /tmp/install-base.sh && rm /tmp/install-base.sh
+RUN sed -i 's/^# *\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen && locale-gen en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LC_ALL=en_US.UTF-8
 
 USER node
 
@@ -63,6 +66,8 @@ ARG GOVULNCHECK_VERSION
 ARG OSV_SCANNER_VERSION
 ARG GOSEC_VERSION
 ARG NEXTJS_VERSION
+ARG CODEX_VERSION
+ARG TFLINT_AWS_PLUGIN_VERSION
 
 # Terraform
 RUN ARCH="$(dpkg --print-architecture)" && \
@@ -77,6 +82,13 @@ RUN ARCH="$(dpkg --print-architecture)" && \
   wget -q "https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}.0/tflint_linux_${ARCH_NAME}.zip" && \
   unzip "tflint_linux_${ARCH_NAME}.zip" && mv tflint /usr/local/bin/ && \
   rm "tflint_linux_${ARCH_NAME}.zip" && chmod +x /usr/local/bin/tflint
+
+# tflint AWS plugin (pre-installed to avoid network access at runtime)
+USER node
+RUN printf 'plugin "aws" {\n  enabled = true\n  version = "%s"\n  source  = "github.com/terraform-linters/tflint-ruleset-aws"\n}\n' "${TFLINT_AWS_PLUGIN_VERSION}" > /tmp/.tflint.hcl && \
+  tflint --config /tmp/.tflint.hcl --init && \
+  rm /tmp/.tflint.hcl
+USER root
 
 # checkov
 RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-pip python3-venv \
@@ -124,7 +136,10 @@ RUN ARCH="$(dpkg --print-architecture)" && \
 
 USER node
 
-RUN npm install -g next@${NEXTJS_VERSION} react@latest react-dom@latest typescript eslint prettier
+RUN npm install -g next@${NEXTJS_VERSION} react@latest react-dom@latest typescript eslint prettier \
+  && npm install -g @openai/codex@${CODEX_VERSION}
+
+RUN mkdir -p /home/node/.codex
 
 WORKDIR /workspace
 

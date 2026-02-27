@@ -13,24 +13,18 @@ code .
 
 ## Images
 
-| Image | Use |
-|-------|-----|
-| `local` | Local development (default) |
-| `infrastructure` | CI/CD for Terraform |
-| `backend` | CI/CD for Go |
-| `frontend` | CI/CD for Next.js |
+| Image            | Use                         |
+| ---------------- | --------------------------- |
+| `local`          | Local development (default) |
+| `infrastructure` | CI/CD for Terraform         |
+| `backend`        | CI/CD for Go                |
+| `frontend`       | CI/CD for Next.js           |
 
 Multi-stage builds. No external base image.
 
-## Local Build
-
-```bash
-./scripts/build-local.sh [infrastructure|backend|frontend|local]
-```
-
 ## Key Files
 
-- `versions.env` - Tool versions (X.Y pinned)
+- `versions.env` - Tool versions (X.Y.Z preferred, X.Y also acceptable)
 - `dockerfiles/` - 4 Dockerfiles
 - `scripts/init-firewall.sh` - Network allowlist
 

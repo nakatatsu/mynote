@@ -37,7 +37,7 @@ jobs:
             key_lower=$(echo "$key" | tr '[:upper:]' '[:lower:]')
             echo "${key_lower}=${value}" >> $GITHUB_OUTPUT
           done < .devcontainer/versions.env
-          echo "build_date=$(date -u +'%Y-%m')" >> $GITHUB_OUTPUT
+          echo "build_date=$(date -u +'%Y.%m.%d')" >> $GITHUB_OUTPUT
 
       - uses: docker/setup-buildx-action@v3
 
