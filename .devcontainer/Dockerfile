@@ -5,7 +5,7 @@
 # ============================================================
 # Base (shared across all targets)
 # ============================================================
-FROM node:24.14 AS base
+FROM node:24.15 AS base
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
@@ -22,27 +22,27 @@ ENV TZ="$TZ" \
     NODE_OPTIONS="--max-old-space-size=4096" \
     CLAUDE_CONFIG_DIR="/home/node/.claude" \
     POWERLEVEL9K_DISABLE_GITSTATUS="true" \
-    AWS_CLI_VERSION=2.34.23 \
+    AWS_CLI_VERSION=2.34.45 \
     GIT_DELTA_VERSION=0.19.2 \
     ZSH_IN_DOCKER_VERSION=1.2.1 \
-    TERRAFORM_VERSION=1.14.8 \
-    TFLINT_VERSION=0.61.0 \
-    CHECKOV_VERSION=3.2.513 \
-    TERRAFORM_DOCS_VERSION=0.21.0 \
-    TFLINT_AWS_PLUGIN_VERSION=0.46.0 \
-    GO_VERSION=1.26.1 \
-    GOFUMPT_VERSION=0.9.2 \
-    GOIMPORTS_VERSION=0.43.0 \
-    GOLANGCI_LINT_VERSION=2.11.4 \
-    GOVULNCHECK_VERSION=1.1.4 \
-    OSV_SCANNER_VERSION=2.3.5 \
-    GOSEC_VERSION=2.25.0 \
-    REACT_VERSION=19.2.4 \
-    TYPESCRIPT_VERSION=6.0.2 \
-    ESLINT_VERSION=10.1.0 \
-    PRETTIER_VERSION=3.8.1 \
-    NEXTJS_VERSION=16.2.2 \
-    CODEX_VERSION=0.118.0
+    TERRAFORM_VERSION=1.15.2 \
+    TFLINT_VERSION=0.62.0 \
+    CHECKOV_VERSION=3.2.526 \
+    TERRAFORM_DOCS_VERSION=0.23.0 \
+    TFLINT_AWS_PLUGIN_VERSION=0.47.0 \
+    GO_VERSION=1.26.3 \
+    GOFUMPT_VERSION=0.10.0 \
+    GOIMPORTS_VERSION=0.44.0 \
+    GOLANGCI_LINT_VERSION=2.12.2 \
+    GOVULNCHECK_VERSION=1.3.0 \
+    OSV_SCANNER_VERSION=2.3.6 \
+    GOSEC_VERSION=2.26.1 \
+    REACT_VERSION=19.2.6 \
+    TYPESCRIPT_VERSION=6.0.3 \
+    ESLINT_VERSION=10.3.0 \
+    PRETTIER_VERSION=3.8.3 \
+    NEXTJS_VERSION=16.2.6 \
+    CODEX_VERSION=0.129.0
 
 # System packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
