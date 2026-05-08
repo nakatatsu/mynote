@@ -17,7 +17,7 @@ score=0
 
 terraform fmt -check -recursive "${TF_DIR}" && score=$((score+1)) || true
 (cd "${TF_DIR}" && terraform init && terraform validate) && score=$((score+1)) || true
-(cd "${TF_DIR}" && cp /workspace/benchmark/.tflint.hcl . && tflint --init && tflint -f compact) \
+(cd "${TF_DIR}" && cp "$(git rev-parse --show-toplevel)/benchmark/.tflint.hcl" . && tflint --init && tflint -f compact) \
   && score=$((score+1)) || true
 checkov -d "${TF_DIR}" --framework terraform && score=$((score+1)) || true
 
